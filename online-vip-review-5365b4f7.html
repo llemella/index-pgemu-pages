@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>乐鱼 · 简明指南</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f7fafc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1a2e3b;
+      line-height: 1.6;
+      padding: 1.5rem;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* hero 横幅 */
+    .hero {
+      background: linear-gradient(145deg, #d9f0f0 0%, #b3ddd9 80%);
+      border-radius: 2rem;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 8px 20px rgba(0, 40, 50, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(44, 130, 130, 0.10) 0%, transparent 70%);
+      top: -60px;
+      right: -40px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #0b3b3b;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero .sub {
+      font-size: 1.1rem;
+      color: #1d5450;
+      border-left: 4px solid #2f8a86;
+      padding-left: 1rem;
+      max-width: 460px;
+    }
+
+    /* 背景说明卡片 */
+    .context-card {
+      background: #ffffff;
+      border-radius: 1.8rem;
+      padding: 2rem 2rem 2.2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 12px rgba(30, 70, 70, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .context-card .tag {
+      display: inline-block;
+      background: #d5efec;
+      color: #0c4e4b;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      align-self: flex-start;
+    }
+
+    .context-card p {
+      color: #1f3f42;
+    }
+
+    /* 网格卡片区域 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (min-width: 600px) {
+      .grid-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 1.6rem;
+      padding: 1.8rem 1.6rem;
+      box-shadow: 0 2px 10px rgba(0, 30, 30, 0.04);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+      border: 1px solid #e1f0ed;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(30, 80, 80, 0.06);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #0f4747;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      color: #2a4b4b;
+      font-size: 0.96rem;
+    }
+
+    .card .accent-line {
+      display: block;
+      width: 2.4rem;
+      height: 3px;
+      background: #4ba39e;
+      margin: 0.6rem 0 0.8rem 0;
+      border-radius: 10px;
+    }
+
+    /* 提示区域 */
+    .note-box {
+      background: #e9f5f2;
+      border-radius: 1.8rem;
+      padding: 2rem 2rem;
+      margin-bottom: 2rem;
+      border-left: 5px solid #27807b;
+    }
+
+    .note-box p {
+      color: #133e3c;
+      font-size: 0.98rem;
+    }
+
+    /* FAQ 摘要 */
+    .faq-mini {
+      background: #ffffff;
+      border-radius: 1.8rem;
+      padding: 1.8rem 2rem;
+      margin-bottom: 2.8rem;
+      border: 1px solid #deefec;
+    }
+
+    .faq-mini h4 {
+      font-weight: 500;
+      color: #115250;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .faq-mini .q-item {
+      padding: 0.6rem 0;
+      border-bottom: 1px dashed #d3e6e2;
+    }
+
+    .faq-mini .q-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-mini .q {
+      font-weight: 500;
+      color: #194a47;
+      font-size: 0.95rem;
+    }
+
+    .faq-mini .a {
+      color: #2d5b58;
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+      padding-left: 0.8rem;
+    }
+
+    /* 页尾 */
+    .footer-note {
+      text-align: center;
+      padding: 1.2rem 1rem 0.5rem;
+      color: #3b6d69;
+      font-size: 0.9rem;
+      border-top: 1px solid #dbeae6;
+    }
+
+    .footer-note a {
+      color: #166b65;
+      text-decoration: none;
+      border-bottom: 1px dotted #6bb5ae;
+    }
+
+    .footer-note a:hover {
+      color: #0a4944;
+      border-bottom: 1px solid #0c6b64;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid #348f89;
+      color: #1f6b66;
+      padding: 0.5rem 1.6rem;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      background: transparent;
+      transition: background 0.2s;
+      text-decoration: none;
+      margin-top: 0.8rem;
+    }
+
+    .btn-outline:hover {
+      background: #d2efeb;
+    }
+
+    .mobile-friendly {
+      word-break: break-word;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #d5e8e4;
+      margin: 1.8rem 0;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 首页横幅 hero -->
+  <div class="hero">
+    <h1>乐鱼 · 简明引导</h1>
+    <div class="sub">一份干净、不夸张的浏览备忘</div>
+  </div>
+
+  <!-- 背景说明 -->
+  <div class="context-card">
+    <span class="tag">关于这个页面</span>
+    <p>常有人问起，想了解 <a href="https://online-vip-leyu.com" style="color: #1c7a72; text-decoration: underline; text-underline-offset: 3px;">乐鱼</a> 是什么、在哪里可以找到相关的内容。这篇介绍不渲染、不诱导，只是把一些基本信息整理出来。你会发现，花几分钟读一遍，比零散搜索更省时间。</p>
+  </div>
+
+  <!-- 三段自然介绍·网格卡片 -->
+  <div class="grid-cards">
+    <div class="card">
+      <h3>一点背景</h3>
+      <span class="accent-line"></span>
+      <p>乐鱼这个名字，在部分用户讨论中常与线上内容服务相关联。它并非新近出现的概念，但近一两年的界面和交互有了不少调整。如果你之前接触过，可能会注意到一些细节变化；如果完全陌生，也不必着急——慢慢熟悉就好。</p>
+    </div>
+    <div class="card">
+      <h3>使用场景</h3>
+      <span class="accent-line"></span>
+      <p>有人把它当作获取特定信息的渠道之一，也有人只是偶尔浏览。不论哪种方式，弄清楚自己的需求、保持基本的网络习惯，比追求“捷径”更重要。关于 <a href="https://online-vip-leyu.com" style="color: #1c7a72; text-decoration: underline; text-underline-offset: 3px;">乐鱼</a> 的具体页面布局，建议直接通过浏览器查看，文字描述总归有限。</p>
+    </div>
+    <div class="card" style="grid-column: span 1; @media(min-width:600px){grid-column: span 2;}">
+      <h3>访问提醒</h3>
+      <span class="accent-line"></span>
+      <p>无论从哪个入口跳转，注意核对链接的拼写和域名。网络上偶尔会出现相似名称的页面，保持留意就好。如果你打算浏览 <a href="https://online-vip-leyu.com" style="color: #1c7a72; text-decoration: underline; text-underline-offset: 3px;">乐鱼</a> 的内容，推荐使用主流浏览器，并确保网络环境稳定。不需要额外下载什么工具，一个标签页就足够了。</p>
+    </div>
+  </div>
+
+  <!-- 页尾访问提示（兼具体说明） -->
+  <div class="note-box">
+    <p style="font-weight: 400;">📌 小提示：如果你正在找那个常被提起的站点，可以直接在地址栏输入域名 <strong>online-vip-leyu.com</strong>，也可以从其他可靠来源的链接跳转。书签功能是个好习惯。另外，整站没有复杂的注册门槛，某些板块可能需要基础的页面操作。建议花一两分钟浏览一下整体结构，比盲目点来点去有效得多。</p>
+  </div>
+
+  <!-- FAQ 摘要（自然融入） -->
+  <div class="faq-mini">
+    <h4>几个常见疑问 · 简短回答</h4>
+    <div class="q-item">
+      <div class="q">—— 乐鱼 需要付费吗？</div>
+      <div class="a">大部分区域免费浏览，部分特定内容可能涉及订阅或积分，页面会有明确提示。</div>
+    </div>
+    <div class="q-item">
+      <div class="q">—— 移动端显示正常吗？</div>
+      <div class="a">适配多数现代手机浏览器，横竖屏都可。偶尔出现排版偏移，刷新或清理缓存即可。</div>
+    </div>
+    <div class="q-item">
+      <div class="q">—— 有没有官方的说明文档？</div>
+      <div class="a">网站内包含基础的帮助页，位置通常在页面底部或侧边菜单。也可以直接通过 <a href="https://online-vip-leyu.com" style="color: #1c7a72; text-decoration: underline; text-underline-offset: 2px;">乐鱼</a> 首页导航寻找“常见问题”条目。</div>
+    </div>
+  </div>
+
+  <!-- 页尾访问提示（最终行） -->
+  <div class="footer-note">
+    <span>本页作为概要参考，更多信息请直接访问 </span>
+    <a href="https://online-vip-leyu.com">乐鱼</a>
+    <span style="display: inline-block; margin: 0 0.3rem;">·</span>
+    <span>保持简洁，不夸大其词</span>
+  </div>
+
+  <!-- 极简分隔与版本 -->
+  <hr>
+  <div style="text-align: center; color: #4b7a76; font-size: 0.8rem; padding-bottom: 0.5rem;">—— 杂志式索引 · 仅做介绍用途 ——</div>
+</div>
+</body>
+</html>
