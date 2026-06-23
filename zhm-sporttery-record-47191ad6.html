@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>竞彩 | 体育赛事 & 竞猜平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: #1f2a3a;
+            background-color: #f5f7fa;
+        }
+
+        /* 深色英雄区 —— 带渐变与轻微纹理 */
+        .hero {
+            background: linear-gradient(145deg, #0b1a2e 0%, #162b44 60%, #1c3551 100%);
+            color: #e8edf2;
+            padding: 3.5rem 1.5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 4px, transparent 4px, transparent 8px);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: 0 auto 1.2rem;
+            font-size: 1.1rem;
+            opacity: 0.88;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .highlight-link {
+            color: #f7c948;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 500;
+        }
+
+        .hero .highlight-link:hover {
+            color: #ffe18a;
+        }
+
+        /* 正文区（浅色背景） */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 2.8rem 0;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #0b1a2e;
+            border-left: 5px solid #f7c948;
+            padding-left: 1rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.8rem;
+            margin: 1.8rem 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 1.8rem 1.4rem;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease, box-shadow 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #1f3a5a;
+        }
+
+        .card p {
+            color: #3c4d62;
+            font-size: 0.98rem;
+        }
+
+        .card .small-note {
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #6f7e91;
+        }
+
+        .story-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 2rem;
+            margin: 2rem 0 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .story-box p {
+            margin-bottom: 1.2rem;
+        }
+
+        .story-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-mini {
+            background: #eef2f7;
+            border-radius: 20px;
+            padding: 1.6rem 2rem;
+            margin: 2rem 0 1.5rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            color: #1f3a5a;
+            margin-bottom: 0.15rem;
+        }
+
+        .faq-item p {
+            margin-left: 0.2rem;
+            color: #2e425b;
+            font-size: 0.96rem;
+        }
+
+        .site-link {
+            color: #b8860b;
+            font-weight: 500;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .site-link:hover {
+            color: #e0a800;
+        }
+
+        .footer-links {
+            border-top: 1px solid #d6dee8;
+            padding: 2rem 0 2.5rem;
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem 2.2rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a {
+            color: #2c4a6e;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        .footer-links a:hover {
+            border-bottom-color: #f7c948;
+        }
+
+        .footer-meta {
+            text-align: center;
+            padding: 1.2rem 0 2rem;
+            color: #5f6f82;
+            font-size: 0.85rem;
+        }
+
+        .footer-meta a {
+            color: #2c4a6e;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #cbd5e1, transparent);
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; }
+            .section-title { font-size: 1.35rem; }
+            .grid-3 { gap: 1rem; }
+            .card { padding: 1.4rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO 区 -->
+    <section class="hero">
+        <h1>赛事脉搏 &nbsp;·&nbsp; 竞猜视野</h1>
+        <p>
+            从五大联赛到热门杯赛，从实时数据到策略分享——
+            <strong><a href="https://zhm-sporttery.com" class="highlight-link">竞彩网</a></strong>
+            陪伴每一位爱好者理性关注体育博弈。
+        </p>
+        <p style="font-size: 0.95rem; opacity: 0.7; margin-top: 0.2rem;">
+            聚焦竞技本身，保持通透与冷静。
+        </p>
+    </section>
+
+    <div class="container">
+
+        <!-- 优势区：卡片式三点 -->
+        <section class="section">
+            <h2 class="section-title">为什么许多人选择这里</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>⚽ 覆盖广泛</h3>
+                    <p>足球、篮球、网球等主流赛事，以及部分小众联赛，信息维度丰富，适合不同偏好。</p>
+                    <div class="small-note">联赛数据持续更新</div>
+                </div>
+                <div class="card">
+                    <h3>📊 数据与资讯</h3>
+                    <p>提供历史交锋、近期状态、伤病名单等参考信息，辅助用户形成自己的判断体系。</p>
+                    <div class="small-note">非投注建议，仅作信息</div>
+                </div>
+                <div class="card">
+                    <h3>🧠 社区讨论氛围</h3>
+                    <p>用户可交流赛事观点、分享分析思路，但平台倡导理性参与，警惕过度投入。</p>
+                    <div class="small-note">理性讨论，量力而行</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 说明区：一段带有叙事感的背景介绍 -->
+        <section class="section" style="padding-top: 0;">
+            <div class="story-box">
+                <p>
+                    大约十年前，几个朋友因为周末一起看球，总爱在赛前猜比分、赌一顿夜宵。后来发现，单纯靠直觉太飘忽，于是开始记录数据、球队风格、裁判尺度……慢慢地，一个非正式的“资料库”雏形出现了。那个用共享文档搭建的表格，后来演变成如今的<a href="https://zhm-sporttery.com" class="site-link">竞彩网</a>。
+                </p>
+                <p>
+                    我们并不是要教谁“必胜技巧”，而是想把那些公开的、客观的赛事信息整理得更清晰——让每个人在做出选择前，能看到更多维度。毕竟，体育的魅力从来不只是结果，还有过程里的推演与意外。
+                </p>
+                <p style="font-style: italic; color: #2e5670;">
+                    简单来说：这里是一张更干净的“信息工作台”，仅此而已。
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ 摘要 -->
+        <section class="section" style="padding-top: 0;">
+            <h2 class="section-title">几个常见疑问</h2>
+            <div class="faq-mini">
+                <div class="faq-item">
+                    <strong>❓ 需要注册才能浏览吗？</strong>
+                    <p>大部分赛事数据和资讯可直接查看，部分深度功能或个性化设置可能需要免费注册。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>❓ 这里的“数据”可靠吗？</strong>
+                    <p>数据来源为公开赛事统计与官方信息，但竞技体育瞬息万变，建议交叉核对最新名单。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>❓ 有推荐的“必中”方案吗？</strong>
+                    <p>没有。任何声称“必中”的都值得警惕。我们只提供信息，决策始终在你自己手中。</p>
+                </div>
+            </div>
+            <p style="font-size: 0.95rem; color: #3b5775; margin-top: 0.3rem;">
+                —— 更多细节可前往 <a href="https://zhm-sporttery.com" class="site-link">竞彩网</a> 帮助页面了解。
+            </p>
+        </section>
+
+        <!-- 底部链接区域（除了竞彩网主链，还放了几个占位链接，保持自然） -->
+        <hr>
+        <div class="footer-links">
+            <a href="https://zhm-sporttery.com">竞彩网</a>
+            <a href="#">赛事日程</a>
+            <a href="#">数据实验室</a>
+            <a href="#">交流区</a>
+            <a href="#">关于我们</a>
+        </div>
+        <div class="footer-meta">
+            <p>© 2025 · 理性观赛，适度参与。本网站仅提供赛事信息聚合。</p>
+            <p style="margin-top: 0.25rem;">
+                <a href="https://zhm-sporttery.com" style="text-decoration:underline; text-underline-offset:2px;">竞彩网</a>
+                — 体育数据与资讯平台
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>
